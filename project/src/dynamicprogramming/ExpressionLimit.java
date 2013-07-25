@@ -248,6 +248,8 @@ public class ExpressionLimit {
 		testCases.add("4*5+2/9-2*5+7");
 		testCases.add("4*5+2/9-2*5+7+12+8*3/5");
 		testCases.add("4*5+2/9-2*5+7+12+8*3/5+4*5+2");
+		testCases.add("4*5+2/9-2*5+7+12+8*3/5+4*5+2+9-2*5+7");
+
         int i = 1;
         long start_time = new GregorianCalendar().getTimeInMillis();
 		for (String testCase : testCases) {

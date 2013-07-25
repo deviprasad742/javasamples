@@ -22,7 +22,7 @@ public class MaxMinArithmetic {
 		char[] charArray = expression.toCharArray();
 		String lastChar = "";
 		for (char nextChar : charArray) {
-			if (nextChar == PLUS || nextChar == '-' ||nextChar == MULT ||nextChar == DIV) {
+			if (nextChar == PLUS || nextChar == SUB ||nextChar == MULT ||nextChar == DIV) {
 				int value = Integer.valueOf(lastChar);
 				operands.add(value);
 				operators.add(nextChar);
@@ -51,6 +51,7 @@ public class MaxMinArithmetic {
 //			System.out.println(i + "-->" + intValue);
 		}
 
+		int loop_count = 0;
 		for (int processedOperands = 2; processedOperands <= operandsLength; processedOperands++) {//
 			for (int start_index = 0; start_index <= operandsLength - processedOperands; start_index++) {
 				// compute max for different blocks 0-3,1-4,2-5 etc
@@ -70,6 +71,7 @@ public class MaxMinArithmetic {
 						blockMin = currentMin;
 						minBlockBrkIdx = start_index + k;
 					}
+					loop_count++;
 				}
 				int endIndex = start_index + processedOperands - 1;
 				maxValue[start_index][endIndex] = blockMax;
@@ -91,6 +93,7 @@ public class MaxMinArithmetic {
 		buildExpression(0, arraySize-1, minBuilder, false);
 		System.out.println(minBuilder.toString());
 		System.out.println("Min Value: " +  minValue[0][arraySize -1]);
+		System.out.println("Total number of loops for '" + operands.size() + "' is " + loop_count);
 	}
 
 	private int computeBlockMaxValue(int start_index, int k, int noOfOperands) {
@@ -183,7 +186,7 @@ public class MaxMinArithmetic {
 	}
 	
 	private boolean isNegativeOperator(char operator) {
-		return operator == '-' || operator == DIV;
+		return operator == SUB || operator == DIV;
 	}
 	
 // 0-4 = 0-2 3-4 
@@ -194,6 +197,7 @@ public class MaxMinArithmetic {
 		testCases.add("4*5+2/9-2*5+7");
 		testCases.add("4*5+2/9-2*5+7+12+8*3/5");
 		testCases.add("4*5+2/9-2*5+7+12+8*3/5+4*5+2");
+		
         int i = 1;
         long start_time = new GregorianCalendar().getTimeInMillis();
 		for (String testCase : testCases) {
