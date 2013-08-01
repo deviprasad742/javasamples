@@ -31,7 +31,7 @@ public class Escape {
 	public int execute() {
 		computeMinLife();
 		int minLife = distance[M-1][N-1];
-		if (minLife == 0) {
+		if (minLife == 0) {// not correct if there's a path with no life taken then minLife = 0;
 			return -1;
 		}
 		return minLife;
@@ -69,7 +69,7 @@ public class Escape {
 			EscapePoint nextPoint = points.poll();
 			int x = nextPoint.x;
 			int y = nextPoint.y;
-			System.out.println(x + "," + y);
+			//System.out.println(x + "," + y);
 			
 			int sumSoFar = distance[x][y];
 			checkAndAdd(x+1, y, sumSoFar, nextPoint, points);
@@ -92,6 +92,7 @@ public class Escape {
 				// add the new path to the point
 				distance[x][y] = nValue;
 				points.add(newPoint);
+				System.out.println(newPoint);
 			}
 		}
 	}
@@ -143,6 +144,11 @@ public class Escape {
         	return false;
         }
 		
+        @Override
+        public String toString() {
+        	return "[" + x + "," +  y + "]";
+        }
+        
 	}
 	
 }
